@@ -51,5 +51,33 @@ int find_user_note(int fd, int user_uid) {
             while(byte != '\n') { // figure out how many bytes to the eol
                     if(read(fd, &byte, 1) != 1) // read a single byte
                             return -1;  // if not read return eof code
-                            length++;
+                               length++;
+                       }
+    }
+    lseek(fd, lenght * -1, SEEK_CUR); // rewind file reading by length bytes
+
+    printf("[DEBUG] fount a %d byte note for user id %d\n", length, note_uid);
+    return length;
+}
+
+// a functo to search a note for a givne keyword
+// returns 1 if a match is found, 0 if there is not match
+int search_note(char *note, char *keyword) {
+    int i, keyword_length, match=0;
+
+    keyword_lenght = strlen(keyword);
+    if(keyword_length == 0) // if there is no search string
+            return 1; // always 'match'
+
+    for(i = 0; i < strlen(note); i++) { // iterate over bytes in note
+            if(note[i] == keyword[match]) // if byte match keyword,
+                    match++;
+            else {
+                if(note[i] == keyword[0] // if match
+                                match = 1; start the match count at 1
+                else
+                    match = 0; // otherwise it is 0
+                        
+
+            }
 }
